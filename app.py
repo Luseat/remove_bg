@@ -9,7 +9,7 @@ import io
 # st.set_page_config digunakan untuk mengatur judul tab di browser dan iconnya.
 st.set_page_config(layout="wide", page_title="Penghapus Background (Tanpa API)")
 
-# Menampilkan judul besar di web kita
+# Menampilkan judul besar di web kitaa
 st.write("## Aplikasi Penghapus Background Foto (Tanpa API & Gratis)")
 st.write("Upload gambar kamu, dan biarkan AI menghapus background-nya secara otomatis dan aman (privasi terjaga).")
 
