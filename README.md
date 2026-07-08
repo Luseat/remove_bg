@@ -43,4 +43,5 @@ Jika Anda ingin menghosting aplikasi ini agar bisa diakses secara publik:
 5. Klik **Deploy** dan aplikasi Anda akan segera *online* secara gratis!
 
 ---
+*Note:*
 *Dibuat oleh Hanifudin Robbani untuk keperluan edukasi dan produktivitas harian.*
