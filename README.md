@@ -1,15 +1,19 @@
-# Aplikasi Penghapus Background (Non-API) ✂️🖼️
+# Aplikasi Penghapus Background Foto (Non-API & Gratis) ✂️🖼️
 
-Aplikasi web sederhana yang dibuat menggunakan **Python** dan **Streamlit** untuk menghapus latar belakang (background) gambar secara instan.
+Aplikasi web canggih yang dibangun menggunakan **Python** dan **Streamlit** untuk menghapus latar belakang (background) gambar secara instan.
 
-Berbeda dengan layanan seperti remove.bg, aplikasi ini **100% GRATIS dan TANPA LIMIT**. Aplikasi ini menggunakan *library* `rembg` (berbasis model AI U^2-Net) yang memproses gambar secara lokal di perangkat Anda.
+Berbeda dengan layanan berbayar, aplikasi ini **100% GRATIS dan TANPA LIMIT**. Proses penghapusan background dilakukan secara lokal di komputer Anda menggunakan *library* `rembg`, sehingga privasi gambar Anda terjamin aman.
 
 ## ✨ Fitur Utama
-* **Gratis Tanpa Batas:** Hapus background jutaan gambar tanpa perlu berlangganan.
-* **Privasi 100% Terjaga:** Gambar diproses secara lokal di komputer Anda, tidak ada gambar yang diunggah ke *server* luar.
-* **Offline Support:** Setelah model AI berhasil diunduh pada percobaan pertama, aplikasi bisa dijalankan tanpa koneksi internet.
-* **Hasil Presisi:** Menggunakan model AI canggih untuk pemotongan objek yang rapi.
-* **Transparansi Terjaga:** Gambar hasil akhir dapat diunduh dalam format PNG agar *background* tetap transparan.
+* **Gratis & Tanpa Batas:** Hapus background jutaan foto tanpa perlu berlangganan.
+* **Privasi 100% Terjaga:** Pemrosesan gambar dilakukan secara offline di mesin Anda (lokal).
+* **Banyak Pilihan Model AI:** 
+  * `u2net` (Default): Sangat bagus untuk foto benda atau manusia secara umum.
+  * `isnet-anime`: Spesialis memotong background dari gambar 2D, anime, kartun, atau ilustrasi.
+  * `u2net_human_seg`: Fokus memotong foto orang/manusia.
+  * `silueta`: Model yang ringan dan sangat cepat.
+* **Warna Background Khusus (Pas Foto):** Selain hasil transparan (PNG), Anda juga bisa langsung menempelkan subjek pada latar belakang warna **Merah, Biru, atau Putih** (sangat cocok untuk keperluan pas foto formal/KTP/Ijazah).
+* **Tampilan (UI) Rapi & Estetik:** Posisi gambar, tombol, dan teks sudah disesuaikan agar proporsional di layar, lengkap dengan logo custom dan footer hak cipta.
 
 ## ⚙️ Persyaratan Sistem
 Pastikan Anda sudah menginstal:
@@ -18,7 +22,7 @@ Pastikan Anda sudah menginstal:
 ## 🚀 Cara Menjalankan Aplikasi (Lokal)
 
 1. Buka Terminal atau Command Prompt (CMD).
-2. Masuk ke direktori proyek ini:
+2. Masuk ke direktori proyek seperti ini:
    ```bash
    cd path/ke/folder/remove-bg
    ```
@@ -30,18 +34,21 @@ Pastikan Anda sudah menginstal:
    ```bash
    streamlit run app.py
    ```
-5. *Browser* Anda akan otomatis terbuka dan menampilkan aplikasi.
+5. *Browser* Anda akan otomatis terbuka dan menampilkan aplikasi (biasanya di `http://localhost:8501`).
 
-> **Catatan Penting:** Saat Anda menghapus *background* gambar untuk **pertama kalinya**, prosesnya mungkin memakan waktu agak lama karena aplikasi akan mengunduh model AI (U^2-Net) sebesar ~170MB secara otomatis. Untuk gambar kedua dan seterusnya, prosesnya akan sangat cepat!
+> **Catatan Penting:** Saat Anda menggunakan salah satu model AI untuk **pertama kalinya** (misalnya saat pertama kali memilih `isnet-anime`), prosesnya mungkin memakan waktu 1-2 menit karena sistem akan mengunduh file model AI (sekitar ~170MB) tersebut secara otomatis. Untuk gambar kedua dan seterusnya, prosesnya akan berjalan sangat cepat!
 
-## 🌐 Cara Deploy ke Streamlit Community Cloud
-Jika Anda ingin menghosting aplikasi ini agar bisa diakses secara publik:
-1. *Upload* seluruh *file* di direktori ini ke *repository* GitHub Anda (Pastikan `requirements.txt` ikut ter-*upload*).
+## 🖼️ Kustomisasi Ikon
+Anda dapat mengganti logo/ikon aplikasi dengan gambar Anda sendiri. Cukup simpan file gambar Anda ke dalam folder proyek ini dan beri nama **`icon.png`**. Aplikasi akan secara otomatis mendeteksinya dan menjadikannya sebagai logo aplikasi (di bagian atas halaman dan di icon tab browser).
+
+## 🌐 Cara Deploy (Hosting) ke Streamlit Community Cloud
+Jika Anda ingin menghosting aplikasi ini secara gratis agar bisa diakses semua orang dari HP atau komputer lain:
+1. *Upload* seluruh file di direktori ini ke *repository* GitHub Anda (Pastikan `requirements.txt`, `app.py`, dan `icon.png` ter-upload).
 2. Kunjungi [Streamlit Community Cloud](https://share.streamlit.io/).
-3. Hubungkan akun GitHub Anda.
-4. Klik **New App**, pilih *repository* Anda, dan arahkan *Main file path* ke `app.py`.
-5. Klik **Deploy** dan aplikasi Anda akan segera *online* secara gratis!
+3. Login menggunakan akun GitHub Anda.
+4. Klik **New App**, pilih *repository* tempat Anda menyimpan *file* tadi.
+5. Pastikan *Main file path* terisi dengan `app.py`.
+6. Klik **Deploy** dan aplikasi Anda akan langsung *online*!
 
 ---
-*Note:*
-*Dibuat oleh Hanifudin Robbani untuk keperluan edukasi dan produktivitas harian.*
+<p align="center">Copyright &copy; 2026 Hanifudin Robbani | All Rights Reserved.</p>

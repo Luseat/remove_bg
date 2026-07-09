@@ -1,77 +1,162 @@
 import streamlit as st
-from rembg import remove
+from rembg import remove, new_session
 from PIL import Image
 import io
+import os
 
-# ============================================
+# ==========================================
 # BAGIAN 1: KONFIGURASI HALAMAN (Tampilan Web)
-# ============================================
-# st.set_page_config digunakan untuk mengatur judul tab di browser dan iconnya.
-st.set_page_config(layout="wide", page_title="Penghapus Background (Tanpa API)")
+# ==========================================
+# Cek apakah file icon.png ada di folder. Jika ada, pakai itu. Jika tidak, pakai emoji default.
+if os.path.exists("icon.png"):
+    ikon = Image.open("icon.png")
+else:
+    ikon = "✂️"
 
-# Menampilkan judul besar di web kitaa
-st.write("## Aplikasi Penghapus Background Foto (Tanpa API & Gratis)")
-st.write("Upload gambar kamu, dan biarkan AI menghapus background-nya secara otomatis dan aman (privasi terjaga).")
+st.set_page_config(layout="wide", page_title="Penghapus Background (Tanpa API)", page_icon=ikon)
+
+# Menampilkan logo di tengah (menggunakan kolom agar ukurannya kecil dan posisinya di tengah)
+if os.path.exists("icon.png"):
+    col_logo_kiri, col_logo_tengah, col_logo_kanan = st.columns([4, 1.5, 4])
+    with col_logo_tengah:
+        st.image("icon.png", use_container_width=True)
+
+# Menampilkan judul besar dan deskripsi dengan format rata tengah (Center) menggunakan HTML
+st.markdown("<h2 style='text-align: center;'>Aplikasi Penghapus Background Foto (Tanpa API & Gratis)</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Upload gambar kamu, dan biarkan AI menghapus background-nya secara otomatis dan aman (privasi terjaga).</p>", unsafe_allow_html=True)
+st.write("") # Memberi sedikit jarak/spasi
 
 # ==========================================
-# BAGIAN 2: FITUR UPLOAD GAMBAR
+# BAGIAN 2: PENGATURAN MODEL, BACKGROUND & UPLOAD
 # ==========================================
+st.markdown("### ⚙️ Pengaturan")
+model_choice = st.selectbox(
+    "Pilih Model AI (Ganti jika hasil potongan berantakan/kurang rapi):",
+    [
+        "u2net (Default - Bagus untuk foto umum/benda)", 
+        "isnet-anime (SUPER - Khusus Gambar Anime/Ilustrasi)", 
+        "u2net_human_seg (Khusus Foto Manusia/Orang Asli)", 
+        "silueta (Ringan & Cepat)"
+    ]
+)
+
+# Pilihan warna background tambahan
+bg_color_choice = st.selectbox(
+    "Pilih Warna Latar Belakang (Cocok untuk Pas Foto/Formal):", 
+    ["Transparan", "Merah (Formal)", "Biru (Formal)", "Putih"]
+)
+
+# Mengubah pilihan dropdown menjadi nama model asli yang dikenali oleh rembg
+model_dict = {
+    "u2net (Default - Bagus untuk foto umum/benda)": "u2net",
+    "isnet-anime (SUPER - Khusus Gambar Anime/Ilustrasi)": "isnet-anime",
+    "u2net_human_seg (Khusus Foto Manusia/Orang Asli)": "u2net_human_seg",
+    "silueta (Ringan & Cepat)": "silueta"
+}
+selected_model_name = model_dict[model_choice]
+
+st.markdown("### 🖼️ Upload Foto")
 # st.file_uploader adalah widget untuk mengunggah file. 
-# type=["png", "jpg", "jpeg"] membatasi jenis file yang bisa dipilih.
 my_upload = st.file_uploader("Pilih gambar (PNG, JPG, JPEG)", type=["png", "jpg", "jpeg"])
 
 # Logika program: Jika pengguna sudah memilih dan mengunggah gambar...
 if my_upload is not None:
     
     # Membuka gambar yang diunggah menggunakan library PIL (Pillow)
-    # Ini seperti membuka foto di aplikasi galeri komputer sebelum diedit
     original_image = Image.open(my_upload)
     
-    # st.columns(2) digunakan untuk membagi layar menjadi 2 kolom (Kiri dan Kanan)
-    col1, col2 = st.columns(2)
+    # st.columns(2) digunakan untuk membagi layar menjadi 2 kolom utama (Kiri dan Kanan)
+    col_kiri, col_kanan = st.columns(2)
     
-    # Menampilkan teks dan gambar asli di Kolom 1 (Kiri)
-    col1.write("### Gambar Asli")
-    col1.image(original_image)
-    
-    # Membuat tombol proses. 
-    # Logika: Jika tombol diklik, kode di dalam blok 'if' ini akan dijalankan.
-    if col1.button("Hapus Background"):
+    with col_kiri:
+        # Menampilkan teks rata tengah dan gambar asli
+        st.markdown("<h3 style='text-align: center;'>Gambar Asli</h3>", unsafe_allow_html=True)
+        
+        # Trik agar gambar tidak terlalu besar: Bungkus dalam sub-kolom
+        _, sub_img_kiri, _ = st.columns([1, 3, 1])
+        with sub_img_kiri:
+            st.image(original_image, use_container_width=True)
+        
+        # Trik membuat tombol ke tengah: Membuat 3 sub-kolom (kosong, tombol, kosong)
+        _, sub_tengah_kiri, _ = st.columns([1, 2, 1])
+        with sub_tengah_kiri:
+            # Tombol ditaruh di sub-kolom tengah biar rata tengah
+            tombol_hapus = st.button("Hapus Background", use_container_width=True)
+            
+    # Jika tombol hapus diklik...
+    if tombol_hapus:
         
         # ==========================================
         # BAGIAN 3: PROSES PENGHAPUSAN BACKGROUND
         # ==========================================
-        
-        # st.spinner memberi efek loading berputar (karena AI butuh waktu beberapa detik)
-        with st.spinner("AI sedang memproses gambar... Mohon tunggu!"):
-            # INI ADALAH INTI DARI APLIKASI:
-            # Fungsi remove() dari library rembg akan secara ajaib memotong objek utama dan membuang background.
-            result_image = remove(original_image)
+        with st.spinner(f"AI ({selected_model_name}) sedang memproses gambar... Mohon tunggu!"):
+            # Membuat session baru berdasarkan model yang dipilih user
+            ai_session = new_session(selected_model_name)
             
-            # Menampilkan teks dan gambar hasil di Kolom 2 (Kanan)
-            col2.write("### Hasil Akhir")
-            col2.image(result_image)
+            # Menghapus background menggunakan model spesifik (Hasilnya masih Transparan/RGBA)
+            result_image = remove(original_image, session=ai_session)
             
-            # ==========================================
-            # BAGIAN 4: FITUR DOWNLOAD HASIL
-            # ==========================================
-            # Gambar hasil (result_image) masih berupa objek PIL di dalam memori Python.
-            # Agar bisa didownload oleh pengguna, kita harus mengubahnya menjadi format file gambar biasa (bytes).
+            # Logika pewarnaan background jika user memilih selain "Transparan"
+            if bg_color_choice != "Transparan":
+                color_map = {
+                    "Merah (Formal)": (255, 0, 0),    # Kode RGB Merah
+                    "Biru (Formal)": (0, 0, 255),     # Kode RGB Biru
+                    "Putih": (255, 255, 255)          # Kode RGB Putih
+                }
+                bg_color = color_map[bg_color_choice]
+                
+                # Bikin kanvas baru (layar kosong) dengan warna solid yang dipilih
+                final_image = Image.new("RGBA", result_image.size, bg_color)
+                
+                # Tempelkan foto orang yang udah tanpa background ke atas kanvas warna tersebut
+                # result_image ditaruh 2 kali karena parameter ke-3 itu berfungsi sebagai 'mask' (pemotong)
+                final_image.paste(result_image, (0, 0), result_image)
+            else:
+                # Jika milih transparan, pakai hasil asli langsung
+                final_image = result_image
             
-            # Siapkan 'wadah' kosong di memori komputer
-            img_bytes = io.BytesIO()
-            
-            # Simpan gambar hasil ke dalam wadah tersebut dengan format PNG 
-            # (Format PNG wajib dipakai agar bagian background yang transparan tidak berubah jadi putih/hitam)
-            result_image.save(img_bytes, format="PNG")
-            
-            # Menyiapkan tombol download yang mengambil data gambar dari wadah tadi
-            col2.download_button(
-                label="Download Gambar Transparan",
-                data=img_bytes.getvalue(),
-                file_name="hasil_remove_bg.png",
-                mime="image/png"
-            )
+            with col_kanan:
+                # Menampilkan teks rata tengah dan gambar hasil
+                st.markdown("<h3 style='text-align: center;'>Hasil Akhir</h3>", unsafe_allow_html=True)
+                
+                # Trik agar gambar tidak terlalu besar: Bungkus dalam sub-kolom
+                _, sub_img_kanan, _ = st.columns([1, 3, 1])
+                with sub_img_kanan:
+                    st.image(final_image, use_container_width=True)
+                
+                # ==========================================
+                # BAGIAN 4: FITUR DOWNLOAD HASIL
+                # ==========================================
+                # Siapkan 'wadah' kosong di memori komputer
+                img_bytes = io.BytesIO()
+                
+                # Simpan gambar hasil ke dalam wadah tersebut dengan format PNG 
+                final_image.save(img_bytes, format="PNG")
+                
+                # Trik membuat tombol ke tengah untuk tombol download
+                _, sub_tengah_kanan, _ = st.columns([1, 2, 1])
+                with sub_tengah_kanan:
+                    st.download_button(
+                        label="Download Gambar Hasil",
+                        data=img_bytes.getvalue(),
+                        file_name="gambar_hasil.png",
+                        mime="image/png",
+                        use_container_width=True
+                    )
 else:
     # Ini akan ditampilkan jika pengguna belum mengunggah gambar apa pun
     st.info("Silakan upload gambar terlebih dahulu untuk memulai.")
+
+# ==========================================
+# BAGIAN 5: FOOTER (Copyright)
+# ==========================================
+# Menambahkan jarak (spasi kosong) agar footer turun ke bawah
+st.markdown("<br><br><br><br>", unsafe_allow_html=True)
+
+st.markdown("---") # Membuat garis pembatas
+st.markdown(
+    "<p style='text-align: center; color: gray; margin-bottom: 5px;'>"
+    "Copyright &copy; 2026 Hanifudin Robbani | All Rights Reserved."
+    "</p>", 
+    unsafe_allow_html=True
+)
