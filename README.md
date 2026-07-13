@@ -50,5 +50,6 @@ Jika Anda ingin menghosting aplikasi ini secara gratis agar bisa diakses semua o
 5. Pastikan *Main file path* terisi dengan `app.py`.
 6. Klik **Deploy** dan aplikasi Anda akan langsung *online*!
 
----
+
 <p align="center">Copyright &copy; 2026 Hanifudin Robbani | All Rights Reserved.</p>
+---
