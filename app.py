@@ -4,9 +4,9 @@ from PIL import Image
 import io
 import os
 
-# ==========================================
+
 # BAGIAN 1: KONFIGURASI HALAMAN (Tampilan Web)
-# ==========================================
+
 # Cek apakah file icon.png ada di folder. Jika ada, pakai itu. Jika tidak, pakai emoji default.
 if os.path.exists("icon.png"):
     ikon = Image.open("icon.png")
@@ -26,9 +26,9 @@ st.markdown("<h2 style='text-align: center;'>Aplikasi Penghapus Background Foto 
 st.markdown("<p style='text-align: center;'>Upload gambar kamu, dan biarkan AI menghapus background-nya secara otomatis dan aman (privasi terjaga).</p>", unsafe_allow_html=True)
 st.write("") # Memberi sedikit jarak/spasi
 
-# ==========================================
+
 # BAGIAN 2: PENGATURAN MODEL, BACKGROUND & UPLOAD
-# ==========================================
+
 st.markdown("### ⚙️ Pengaturan")
 model_choice = st.selectbox(
     "Pilih Model AI (Ganti jika hasil potongan berantakan/kurang rapi):",
@@ -86,9 +86,9 @@ if my_upload is not None:
     # Jika tombol hapus diklik...
     if tombol_hapus:
         
-        # ==========================================
+        
         # BAGIAN 3: PROSES PENGHAPUSAN BACKGROUND
-        # ==========================================
+        
         with st.spinner(f"AI ({selected_model_name}) sedang memproses gambar... Mohon tunggu!"):
             # Membuat session baru berdasarkan model yang dipilih user
             ai_session = new_session(selected_model_name)
@@ -124,9 +124,9 @@ if my_upload is not None:
                 with sub_img_kanan:
                     st.image(final_image, use_container_width=True)
                 
-                # ==========================================
+                
                 # BAGIAN 4: FITUR DOWNLOAD HASIL
-                # ==========================================
+                
                 # Siapkan 'wadah' kosong di memori komputer
                 img_bytes = io.BytesIO()
                 
@@ -147,9 +147,9 @@ else:
     # Ini akan ditampilkan jika pengguna belum mengunggah gambar apa pun
     st.info("Silakan upload gambar terlebih dahulu untuk memulai.")
 
-# ==========================================
+
 # BAGIAN 5: FOOTER (Copyright)
-# ==========================================
+
 # Menambahkan jarak (spasi kosong) agar footer turun ke bawah
 st.markdown("<br><br><br><br>", unsafe_allow_html=True)
 
