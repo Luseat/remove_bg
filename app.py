@@ -7,7 +7,7 @@ import os
 
 # BAGIAN 1: KONFIGURASI HALAMAN (Tampilan Web)
 
-# Cek apakah file icon.png ada di folder. Jika ada, pakai itu. Jika tidak, pakai emoji default.
+
 if os.path.exists("icon.png"):
     ikon = Image.open("icon.png")
 else:
@@ -21,7 +21,7 @@ if os.path.exists("icon.png"):
     with col_logo_tengah:
         st.image("icon.png", use_container_width=True)
 
-# Menampilkan judul besar dan deskripsi dengan format rata tengah (Center) menggunakan HTML
+
 st.markdown("<h2 style='text-align: center;'>Aplikasi Penghapus Background Foto (Tanpa API & Gratis)</h2>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Upload gambar kamu, dan biarkan AI menghapus background-nya secara otomatis dan aman (privasi terjaga).</p>", unsafe_allow_html=True)
 st.write("") # Memberi sedikit jarak/spasi
@@ -46,7 +46,7 @@ bg_color_choice = st.selectbox(
     ["Transparan", "Merah (Formal)", "Biru (Formal)", "Putih"]
 )
 
-# Mengubah pilihan dropdown menjadi nama model asli yang dikenali oleh rembg
+# Pilihan dropdown menjadi nama model asli yang dikenali oleh rembg
 model_dict = {
     "u2net (Default - Bagus untuk foto umum/benda)": "u2net",
     "isnet-anime (SUPER - Khusus Gambar Anime/Ilustrasi)": "isnet-anime",
@@ -72,7 +72,7 @@ if my_upload is not None:
         # Menampilkan teks rata tengah dan gambar asli
         st.markdown("<h3 style='text-align: center;'>Gambar Asli</h3>", unsafe_allow_html=True)
         
-        # Trik agar gambar tidak terlalu besar: Bungkus dalam sub-kolom
+        # Gambar tidak terlalu besar: Bungkus dalam sub-kolom
         _, sub_img_kiri, _ = st.columns([1, 3, 1])
         with sub_img_kiri:
             st.image(original_image, use_container_width=True)
@@ -96,12 +96,12 @@ if my_upload is not None:
             # Menghapus background menggunakan model spesifik (Hasilnya masih Transparan/RGBA)
             result_image = remove(original_image, session=ai_session)
             
-            # Logika pewarnaan background jika user memilih selain "Transparan"
+            # pewarnaan background jika user memilih selain "Transparan"
             if bg_color_choice != "Transparan":
                 color_map = {
-                    "Merah (Formal)": (255, 0, 0),    # Kode RGB Merah
-                    "Biru (Formal)": (0, 0, 255),     # Kode RGB Biru
-                    "Putih": (255, 255, 255)          # Kode RGB Putih
+                    "Merah (Formal)": (255, 0, 0),    #  RGB Merah
+                    "Biru (Formal)": (0, 0, 255),     #  RGB Biru
+                    "Putih": (255, 255, 255)          #  RGB Putih
                 }
                 bg_color = color_map[bg_color_choice]
                 
@@ -153,7 +153,7 @@ else:
 # Menambahkan jarak (spasi kosong) agar footer turun ke bawah
 st.markdown("<br><br><br><br>", unsafe_allow_html=True)
 
-st.markdown("---") # Membuat garis pembatas
+st.markdown("---")
 st.markdown(
     "<p style='text-align: center; color: gray; margin-bottom: 5px;'>"
     "Copyright &copy; 2026 Hanifudin Robbani | All Rights Reserved."
