@@ -8,18 +8,18 @@ import os
 # BAGIAN 1: KONFIGURASI HALAMAN (Tampilan Web)
 
 
-if os.path.exists("icon.png"):
-    ikon = Image.open("icon.png")
+if os.path.exists("assets/icon.png"):
+    ikon = Image.open("assets/icon.png")
 else:
     ikon = "✂️"
 
 st.set_page_config(layout="wide", page_title="Penghapus Background (Tanpa API)", page_icon=ikon)
 
 # Menampilkan logo di tengah (menggunakan kolom agar ukurannya kecil dan posisinya di tengah)
-if os.path.exists("icon.png"):
+if os.path.exists("assets/icon.png"):
     col_logo_kiri, col_logo_tengah, col_logo_kanan = st.columns([4, 1.5, 4])
     with col_logo_tengah:
-        st.image("icon.png", use_container_width=True)
+        st.image("assets/icon.png", use_container_width=True)
 
 
 st.markdown("<h2 style='text-align: center;'>Aplikasi Penghapus Background Foto (Tanpa API & Gratis)</h2>", unsafe_allow_html=True)
