@@ -1,4 +1,9 @@
-# Aplikasi Penghapus Background Foto (Non-API & Gratis) ✂️🖼️
+# Aplikasi Penghapus Background Foto (Tanpa API & Gratis) ✂️🖼️
+
+<div align="center">
+  <img src="assets/preview_tampilan.png" alt="Tampilan Aplikasi Asli" width="800">
+  <br><br>
+</div>
 
 Aplikasi web canggih yang dibangun menggunakan **Python** dan **Streamlit** untuk menghapus latar belakang (background) gambar secara instan.
 
@@ -14,12 +19,6 @@ Berbeda dengan layanan berbayar, aplikasi ini **100% GRATIS dan TANPA LIMIT**. P
   * `silueta`: Model yang ringan dan sangat cepat.
 * **Warna Background Khusus (Pas Foto):** Selain hasil transparan (PNG), Anda juga bisa langsung menempelkan subjek pada latar belakang warna **Merah, Biru, atau Putih** (sangat cocok untuk keperluan pas foto formal/KTP/Ijazah).
 * **Tampilan (UI) Rapi & Estetik:** Posisi gambar, tombol, dan teks sudah disesuaikan agar proporsional di layar, lengkap dengan logo custom dan footer hak cipta.
-
-## 📸 Screenshot Aplikasi
-*(Ganti URL di bawah ini dengan nama file gambar screenshot lu)*
-
-![Tampilan Aplikasi Asli](preview_tampilan.png)
-<br>
 
 ## ⚙️ Persyaratan Sistem
 Pastikan Anda sudah menginstal:
