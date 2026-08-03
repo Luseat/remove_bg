@@ -15,6 +15,12 @@ Berbeda dengan layanan berbayar, aplikasi ini **100% GRATIS dan TANPA LIMIT**. P
 * **Warna Background Khusus (Pas Foto):** Selain hasil transparan (PNG), Anda juga bisa langsung menempelkan subjek pada latar belakang warna **Merah, Biru, atau Putih** (sangat cocok untuk keperluan pas foto formal/KTP/Ijazah).
 * **Tampilan (UI) Rapi & Estetik:** Posisi gambar, tombol, dan teks sudah disesuaikan agar proporsional di layar, lengkap dengan logo custom dan footer hak cipta.
 
+## 📸 Screenshot Aplikasi
+*(Ganti URL di bawah ini dengan nama file gambar screenshot lu)*
+
+![Tampilan Aplikasi Asli](preview_tampilan.png)
+<br>
+
 ## ⚙️ Persyaratan Sistem
 Pastikan Anda sudah menginstal:
 * [Python](https://www.python.org/downloads/) (Disarankan versi 3.8 ke atas)
