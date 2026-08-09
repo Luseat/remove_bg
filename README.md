@@ -17,8 +17,10 @@ Berbeda dengan layanan berbayar, aplikasi ini **100% GRATIS dan TANPA LIMIT**. P
   * `isnet-anime`: Spesialis memotong background dari gambar 2D, anime, kartun, atau ilustrasi.
   * `u2net_human_seg`: Fokus memotong foto orang/manusia.
   * `silueta`: Model yang ringan dan sangat cepat.
-* **Warna Background Khusus (Pas Foto):** Selain hasil transparan (PNG), Anda juga bisa langsung menempelkan subjek pada latar belakang warna **Merah, Biru, atau Putih** (sangat cocok untuk keperluan pas foto formal/KTP/Ijazah).
-* **Tampilan (UI) Rapi & Estetik:** Posisi gambar, tombol, dan teks sudah disesuaikan agar proporsional di layar, lengkap dengan logo custom dan footer hak cipta.
+* **Fitur Custom Background (Baru!):** Selain mendapatkan hasil transparan (PNG), Anda kini bisa:
+  * **Warna Solid:** Menggunakan *preset* latar belakang warna **Merah, Biru, atau Putih** untuk keperluan pas foto formal/KTP, **ATAU** memilih warna kustom apa pun sesuka hati menggunakan fitur *Color Picker*.
+  * **Gambar Latar:** Mengunggah foto lain dari perangkat Anda (misal foto pantai/pemandangan) untuk dijadikan latar belakang baru. AI akan otomatis menyesuaikan ukuran (*auto-resize*) agar menyatu sempurna.
+* **Tampilan (UI) Rapi & Estetik:** Posisi gambar, tombol, dan teks sudah disesuaikan agar proporsional di layar.
 
 ## ⚙️ Persyaratan Sistem
 Pastikan Anda sudah menginstal:
