@@ -44,12 +44,12 @@ model_choice = st.selectbox(
 bg_color_choice = st.selectbox(
     "Pilih Latar Belakang (Warna/Gambar):", 
     [
-        "Transparan", 
-        "Merah (Formal)", 
-        "Biru (Formal)", 
-        "Putih", 
-        "Warna Kustom (Pilih Sendiri)", 
-        "Gambar Kustom (Upload Sendiri)"
+        "🔲 Transparan", 
+        "🔴 Merah (Formal)", 
+        "🔵 Biru (Formal)", 
+        "⚪ Putih", 
+        "🎨 Warna Kustom (Pilih Sendiri)", 
+        "🖼️ Gambar Kustom (Upload Sendiri)"
     ]
 )
 
@@ -58,9 +58,9 @@ custom_color_hex = None
 custom_bg_upload = None
 
 # Munculkan widget tambahan sesuai pilihan user
-if bg_color_choice == "Warna Kustom (Pilih Sendiri)":
-    custom_color_hex = st.color_picker("Pilih warna yang diinginkan:", "#00f900")
-elif bg_color_choice == "Gambar Kustom (Upload Sendiri)":
+if bg_color_choice == "🎨 Warna Kustom (Pilih Sendiri)":
+    custom_color_hex = st.color_picker("Pilih warna kesukaanmu:", "#00f900")
+elif bg_color_choice == "🖼️ Gambar Kustom (Upload Sendiri)":
     custom_bg_upload = st.file_uploader("Upload foto latar belakang (PNG/JPG)", type=["png", "jpg", "jpeg"], key="bg_uploader")
 
 
@@ -115,8 +115,8 @@ if my_upload is not None:
             result_image = remove(original_image, session=ai_session)
             
             # pewarnaan background jika user memilih selain "Transparan"
-            if bg_color_choice != "Transparan":
-                if bg_color_choice == "Warna Kustom (Pilih Sendiri)":
+            if bg_color_choice != "🔲 Transparan":
+                if bg_color_choice == "🎨 Warna Kustom (Pilih Sendiri)":
                     # Convert kode warna HEX ke RGB
                     h = custom_color_hex.lstrip('#')
                     bg_color = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
@@ -124,7 +124,7 @@ if my_upload is not None:
                     final_image = Image.new("RGBA", result_image.size, bg_color)
                     final_image.paste(result_image, (0, 0), result_image)
                     
-                elif bg_color_choice == "Gambar Kustom (Upload Sendiri)":
+                elif bg_color_choice == "🖼️ Gambar Kustom (Upload Sendiri)":
                     if custom_bg_upload is not None:
                         # Buka gambar pemandangan yang diupload user
                         bg_img = Image.open(custom_bg_upload).convert("RGBA")
@@ -141,16 +141,16 @@ if my_upload is not None:
                         
                 else: # Opsi Warna Formal Lama (Merah, Biru, Putih)
                     color_map = {
-                        "Merah (Formal)": (255, 0, 0),    #  RGB Merah
-                        "Biru (Formal)": (0, 0, 255),     #  RGB Biru
-                        "Putih": (255, 255, 255)          #  RGB Putih
+                        "🔴 Merah (Formal)": (255, 0, 0),    
+                        "🔵 Biru (Formal)": (0, 0, 255),     
+                        "⚪ Putih": (255, 255, 255)          
                     }
                     bg_color = color_map[bg_color_choice]
                     
                     # Bikin kanvas baru dengan warna solid yang dipilih
                     final_image = Image.new("RGBA", result_image.size, bg_color)
                     
-                    # Tempelkan foto yang udah tanpa background ke atas kanvas warna tersebut
+                    # Tempelkan foto orang yang udah tanpa background ke atas kanvas warna tersebut
                     final_image.paste(result_image, (0, 0), result_image)
             else:
                 # Jika milih transparan, pakai hasil asli langsung
@@ -171,10 +171,10 @@ if my_upload is not None:
                 # Siapkan 'wadah' kosong di memori komputer
                 img_bytes = io.BytesIO()
                 
-                # Simpan gambar hasil ke dalam wadah tersebut dengan format PNG 
+                # Simpan gambar hasil ke format PNG 
                 final_image.save(img_bytes, format="PNG")
                 
-                # Trik membuat tombol ke tengah untuk tombol download
+                # membuat tombol ke tengah untuk tombol download
                 _, sub_tengah_kanan, _ = st.columns([1, 2, 1])
                 with sub_tengah_kanan:
                     st.download_button(
@@ -191,7 +191,7 @@ else:
 
 # BAGIAN 5: FOOTER (Copyright)
 
-# Menambahkan jarak (spasi kosong) agar footer turun ke bawah
+# Menambahkan jarak (spasi kosong) footer turun ke bawah
 st.markdown("<br><br><br><br>", unsafe_allow_html=True)
 
 st.markdown("---")
