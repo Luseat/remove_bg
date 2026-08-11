@@ -59,7 +59,7 @@ custom_bg_upload = None
 
 # Munculkan widget tambahan sesuai pilihan user
 if bg_color_choice == "🎨 Warna Kustom (Pilih Sendiri)":
-    custom_color_hex = st.color_picker("Pilih warna kesukaanmu:", "#00f900")
+    custom_color_hex = st.color_picker("Pilih warna yang ingin dipilih:", "#00f900")
 elif bg_color_choice == "🖼️ Gambar Kustom (Upload Sendiri)":
     custom_bg_upload = st.file_uploader("Upload foto latar belakang (PNG/JPG)", type=["png", "jpg", "jpeg"], key="bg_uploader")
 
