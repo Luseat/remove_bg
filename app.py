@@ -24,7 +24,7 @@ if os.path.exists("assets/icon.png"):
 
 st.markdown("<h2 style='text-align: center;'>Aplikasi Penghapus Background Foto (Tanpa API & Gratis)</h2>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Upload gambar kamu, dan biarkan AI menghapus background-nya secara otomatis dan aman (privasi terjaga).</p>", unsafe_allow_html=True)
-st.write("") # Memberi sedikit jarak/spasi
+st.write("") 
 
 
 # BAGIAN 2: PENGATURAN MODEL, BACKGROUND & UPLOAD
